@@ -43,6 +43,14 @@ class User < ApplicationRecord
     users.find_by_activated(email).present?
   end
 
+  def remember(jti)
+    update!(refresh_jti: jti)
+  end
+  
+  def forget
+    update!(refresh_jti: nil)
+  end
+
   private
   
     # email小文字化
